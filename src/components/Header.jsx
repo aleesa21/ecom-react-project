@@ -40,8 +40,10 @@ export default function Header() {
             </div>
             {loggedInUser ?(
               <>
-              <span>hi {loggedInUser.name}</span>
-              <button onClick={logout}>Logout</button>
+              <div className="logout-and-name">
+              <span>Hi,{loggedInUser.name.split(" ")[0]}</span>
+              <button className="nav-logout-btn" onClick={logout}>Logout</button>
+              </div>
               </>
             ):<> <div>
              <Link to="/login"><button className="header-login-btn">Login </button></Link>

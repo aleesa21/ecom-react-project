@@ -28,6 +28,14 @@ a{
     align-items: center;
     gap:10px;
 }
+.logout-and-name{
+    display:none;
+    align-items: center;
+    gap:10px;
+}
+.logout-and-name span{
+    color:#b8860b;
+}
 .nav-left-logo{
     display: flex;
     gap:10px;
@@ -71,6 +79,13 @@ font-weight: 500;
     border-radius:50px;
     background:none;
     display: none;
+}
+.nav-logout-btn{
+     border:1px solid #e2ddd5;
+    padding:0.45rem 1.1rem;
+    border-radius:50px;
+    background:none;
+    
 }
 .header-signup-btn{
      border:1px solid #b8860b;
@@ -126,5 +141,8 @@ font-weight: 500;
 }
 .wishlist-icon{
     display: none;
+}
+.logout-and-name{
+    display: flex;
 }
 }

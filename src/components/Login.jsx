@@ -55,9 +55,8 @@ export default function Login() {
         }))
         return
       }
-      localStorage.setItem("loggedInUser",JSON.stringify(matchedUser))
       login(matchedUser)
-      alert("Login Successful! Welcome back.")
+      // alert("Login Successful! Welcome back.")
       navigate("/")
     }
 
