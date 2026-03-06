@@ -1,0 +1,130 @@
+html,body{
+    padding:0;
+    margin:0;
+}
+a{
+    text-decoration: none;
+    color:black;
+}
+.nav-logo{
+    font-size: 2rem;
+    font-family:'Cormorant Garamond', serif;
+    font-weight: 700;
+    color:#b8860b;
+}
+.nav-logo span{
+    color:#1a1510;
+}
+.navbar{
+    font-family: 'Outfit', sans-serif;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:0.5rem ;
+    border:1px solid #e2ddd5;
+}
+.nav-right-logo{
+    display:flex;
+    align-items: center;
+    gap:10px;
+}
+.nav-left-logo{
+    display: flex;
+    gap:10px;
+    align-items: center;
+}
+.nav-links{
+    display:none;
+    font-weight:500;
+}
+.nav-links div{
+    font-family: 'Outfit', sans-serif;
+font-weight: 500;
+    color:#4f4537;
+}
+.hamburger{
+    cursor: pointer;
+}
+.search{
+    display: none;
+}
+.search-input{
+    padding:0.5rem 4rem 0.5rem 0.5rem;
+    border-radius:  6px 0 0 6px;
+    border:none;
+    background: rgb(243, 243, 243);
+}
+.search-input:focus{
+    outline: none;
+}
+.search-btn{
+    padding:0.5rem 0.7rem 0.5rem 0.5rem;
+    border:none;
+    font-size:1.05rem;
+    border-radius:0 6px 6px 0;
+    background: rgb(243, 243, 243);
+
+}
+.header-login-btn{
+    border:1px solid #e2ddd5;
+    padding:0.45rem 1.1rem;
+    border-radius:50px;
+    background:none;
+    display: none;
+}
+.header-signup-btn{
+     border:1px solid #b8860b;
+    padding:0.45rem 1.1rem;
+    border-radius:50px;
+    color:white;
+    background: #b8860b;
+    display: none;
+}
+.wishlist-icon{
+    border:1px solid #e2ddd5;
+    padding:0.2rem 0.45rem;
+    border-radius: 5px;
+}
+
+@media only screen and (min-width: 600px) {
+.navbar{
+    padding: 0.75rem 2rem;
+}
+}
+@media only screen and (min-width: 768px) {
+    .mobile-menu{
+        display: none;
+    }
+    .search-icon{
+        display: none;
+    }
+    .search{
+        display:flex;
+    }
+    .search-input{
+    padding:0.7rem 6rem 0.7rem 0.5rem;
+}
+/* .nav-left-logo{
+    
+    gap:20px;
+   
+} */
+}
+@media only screen and (min-width: 992px) {
+.nav-links{
+        display:flex;
+        gap:2rem;
+    }
+     .hamburger{
+        display:none;
+    }
+.header-login-btn{
+    display: block;
+}
+.header-signup-btn{
+    display: block;
+}
+.wishlist-icon{
+    display: none;
+}
+}
