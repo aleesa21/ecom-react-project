@@ -1,4 +1,251 @@
-.body-div{
-    background:rgb(214, 214, 214);
-    height:500px;
+.padding{
+    padding: 0.5rem;
+}
+.hero-section{
+    background:#FDF8EC;
+    font-family: 'Outfit', sans-serif;
+    /* border: 1px solid black; */
+}
+.golden{
+    color: #b8860b;
+}
+.newarrival-text{
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    letter-spacing: .2em;
+}
+.hero-main-section{
+    padding:0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.hero-left-sec{
+    width:100%;
+    max-width: 650px;
+    /* border:1px solid black; */
+}
+
+.discover-text{
+     font-family:'Cormorant Garamond', serif;
+     font-size:2.8rem;
+     font-weight: 500;
+     margin:0;
+}
+.hero-left-sec p{
+    color:#5a5248;
+    line-height: 1.85;
+    margin-bottom: 2.5rem;
+    max-width: 440px;
+    width:100%;
+}
+
+.hero-right-sec{
+    display:none;
+}
+.explore-btn{
+    padding:0.9rem 1.9rem;
+    border-radius: 50px;
+    border:#b8860b;
+    background-color: #b8860b;
+    color:white;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.ourstory-btn{
+    padding:0.7rem 1.7rem;
+    border-radius: 50px;
+    border:#b8860b;
+    font-size: 1rem;
+    border: 2px solid #d4cfc6;
+    background-color: inherit;
+}
+.hero-left-btns{
+    display: flex;
+    flex-wrap: wrap;
+    gap:20px; 
+}
+.floating-container{
+   width: 300px;
+   height:250px;
+    /* border:1px solid black; */
+    position: relative;
+}
+.floating-child{
+    max-width: 120px;
+    max-height: 100px;
+    /* border:1px solid red; */ 
+}
+.fc1{
+    position: absolute;
+    top: 0%; right: 25%;
+    /* border-color:blue; */
+}
+.fc2{
+    position: absolute;
+    top: 20%; right: 5%;
+    /* border-color: green; */
+}
+.fc3{
+    position: absolute;
+     top: 35%; right: 30%;
+    /* border-color: rgb(223, 247, 6); */
+}
+.fc4{
+    position: absolute;
+    top: 15%; right: 62%;
+}
+.image-card-home{
+    height:auto;
+    width:100%;  
+}
+hr{
+    max-width: 650px;
+    margin-left: 0;
+    border:1px solid #e2ddd5;
+    background-color: #FDF8EC;
+}
+.hr{
+     background-color: #FDF8EC;
+}
+
+/* section 2 css */
+
+.section2{
+    background: #FDF8EC;
+    font-family:'Outfit', sans-serif;
+}
+.sec-2-num{
+    color: #b8860b;
+    font-size:32px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+}
+.sec-2-text{
+     color:#8c847a;
+     font-family:'Outfit', sans-serif;
+     letter-spacing: 0.06rem;
+     text-transform: uppercase;
+     font-size: 14px;
+}
+.section2-top{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap:25px;
+    padding: 0.5rem;
+}
+
+.rotating{
+    color:#5a5248;
+    font-weight: 600;
+     border-top: 1px solid #e2ddd5;
+  border-bottom: 1px solid #e2ddd5;
+  background: #f0ede6;
+  padding: 0.75rem 0;
+  display: flex;
+  overflow: hidden;
+  /* overflow-x:auto; */
+}
+.group{
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex-shrink:0;
+    width: max-content;
+    animation: rotate 12s infinite linear;
+    margin-right: 3rem;
+}
+@keyframes rotate {
+    from {translate: 0;}
+    to {translate: -50%;}
+}
+   
+/* section-3 css */
+.section-3{
+    background: #f7f5f0;
+    padding:48px 0.5rem;
+}
+.sec3-top-text{
+    font-weight:700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.2rem;
+
+}
+.featured-text{
+    font-size:28px;
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 2.5rem;
+}
+.featured-text span{
+    font-style: italic;
+    color: #b8860b;
+}
+.select-list{
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+     column-gap:2rem;
+     row-gap: 0.5rem;
+}
+.filter-list{
+    border: 1px solid black;
+    padding:0.45rem 1rem;
+    border-radius: 50px;
+    font-size:0.8rem;
+
+}
+
+
+
+
+
+/* responsive css */
+@media only screen and (min-width: 600px) {
+    .padding{
+    padding: 0.75rem 2rem;
+}
+.hero-main-section{
+    padding: 0.75rem 2rem;
+}.explore-btn{
+    padding:1rem 2rem;
+    font-size: 1.1rem;
+}
+.ourstory-btn{
+    padding:1rem 2rem;
+    font-size: 1.1rem;
+}
+.discover-text{
+    font-size: 4.5rem;
+}
+.featured-text{
+    font-size:44px;
+}
+
+}
+@media only screen and (min-width: 768px) {
+     .hero-right-sec{
+    display:block;
+}
+.section-3{
+    padding:80px 2rem;
+    font-family: 'Outfit',sans-serif;
+}
+}
+@media only screen and (min-width: 992px) {
+    .hero-section{
+        height:calc(100vh - 65px);
+    }
+    .floating-container{
+   width:490px;
+   height:370px;  
+}
+.floating-child{
+    max-width: 200px;
+    max-height: 200px;
+}
+.hero-right-sec{
+    margin-right:20px;
+}  
 }
