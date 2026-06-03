@@ -1,3 +1,9 @@
 export default function About(){
-    return<div>this is about page</div>
+    return <Alisha>hello</Alisha>
+}
+function Alisha({children}){
+    return <>{children}</>
+}
+function Kafle(){
+    return<>alisha kafale</>
 }

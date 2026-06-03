@@ -8,38 +8,47 @@ import Layout from "./components/Layout";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Loginlayout from "./components/Loginlayout";
-import { AuthProvider } from "./context/AuthContext"
+import { AuthProvider } from "./context/AuthContext";
+import { ProductProvider } from "./context/ProductContext";
+
 const router = createBrowserRouter([
   {
- element:<Layout />,
- children:[ {
-    path: "/",
-    element: <Home />,
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/footer",
+        element: <Footer />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/Products",
+        element: <Products />,
+      },
+    ],
   },
   {
-    path:"/footer",
-    element:<Footer />
+    element: <Loginlayout />,
+    children: [
+      { path: "/login", element: <Login /> },
+      { path: "/signup", element: <Signup /> },
+    ],
   },
-  {
-    path:"/about",
-    element:<About />
-  },
-  {
-    path:"/Products",
-    element:<Products />
-  }]
-},
-{
-  element:<Loginlayout />,
-  children:[{path:"/login",element:<Login />},
-{path:"/signup",element:<Signup />}]
-}
-
 ]);
-export default function App(){
-  return<>
-  <AuthProvider>
-  <RouterProvider router={router} />
-  </AuthProvider>
-  </>
+export default function App() {
+  return (
+    <>
+      <AuthProvider>
+        <ProductProvider>
+          <RouterProvider router={router} />
+        </ProductProvider>
+      </AuthProvider>
+    </>
+  );
 }

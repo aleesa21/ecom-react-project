@@ -1,7 +1,10 @@
+import { useContext, useEffect, useState } from "react";
 import "./Home.css";
+import { ProductContext } from "../context/ProductContext";
 export default function Home() {
+  let { product } = useContext(ProductContext);
+
   return (
-    // <><div>this is home</div></>
     <>
       <main>
         <section>
@@ -109,13 +112,42 @@ export default function Home() {
         <section>
           <div className="section-3 padding">
             <div className="golden sec3-top-text">Curated For You</div>
-            <div className="featured-text">Featured <span>Products</span></div>
+            <div className="featured-text">
+              Featured <span>Products</span>
+            </div>
             <div className="select-list">
               <div className="filter-list">✦ All</div>
               <div className="filter-list">Men's clothing</div>
               <div className="filter-list">Jwellery</div>
               <div className="filter-list">Electronics</div>
               <div className="filter-list">Women's Clothing</div>
+            </div>
+            <div className="poducts-container">
+              {product.slice(0, 8).map((item) => {
+                return <div className="product" key={item.id}>
+          <div className="product-top">
+            <div>
+              <img
+                className="prod-img-home"
+                src={item.image}
+                alt={item.title}
+              ></img>
+            </div>
+          </div>
+          <div className="product-bottom">
+            <div className="prod-category">{item.category}</div>
+            <div className="prod-title">
+              {item.title}
+            </div>
+            <div className="prod-rating">{item.rating.rate}({item.rating.count})</div>
+            <div className="prod-price-plus">
+              <div className="prod-price">${item.price}</div>
+              <button className="prod-plusbtn">+</button>
+            </div>
+          </div>
+        </div>
+                  
+              })}
             </div>
           </div>
         </section>

@@ -1,0 +1,122 @@
+ .product-page{
+    font-family: 'Outfit',sans-serif;
+    background: #f7f5f0;
+ }
+ .our-collection-text{
+    font-weight:700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.2rem;
+    margin-bottom: 0.6rem;
+}
+.all-prod-text{
+     font-size:28px;
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 2.5rem;
+    font-size:3.5vw;
+}
+.all-prod-text span{
+    font-style: italic;
+    color: #b8860b;
+}
+.product-filter-list{
+      display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+     column-gap:1.5rem;
+     row-gap: 0.5rem;
+     margin-bottom: 2rem;
+}
+.p-filter-list{
+    border: 1.5px solid #e2ddd5;
+    padding:0.45rem 1rem;
+    border-radius: 50px;
+    font-size:0.8rem;
+    background-color: white;
+    font-size:0.8rem;
+
+}
+
+.poducts-container{
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap:1.5rem;
+}
+.product{
+    display: flex;
+    flex-direction: column;
+    border:1px solid #f0ede6;
+    /* border:1px solid black; */
+    border-radius: 18px;
+    width: 297px;
+}
+.product-top{
+    height:297px;
+    background: #e2ddd5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:18px 18px 0 0;
+}
+.product-bottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: white;
+    padding:17px 19px;
+    font-family: 'Outfit', sans-serif;
+    border-radius: 0 0 18px 18px ;
+    flex:1;
+
+}
+.prod-img-home{
+    max-width: 100%;
+    max-height:170px;
+
+}
+.prod-category{
+    text-transform: uppercase;
+    letter-spacing: 0.12rem;
+    margin-bottom: 0.35rem;
+    font-size: 0.65rem;
+    color:#b8860b;
+    font-weight: 700;
+}
+.prod-title{
+   font-size:0.88rem;
+   font-weight:600;
+   margin-bottom: 0.55rem;
+   color:#1a1510;
+}
+.prod-rating{
+    font-size: 0.72rem;
+    color:#8c847a;
+    margin-bottom: 0.8rem;
+}
+.prod-price-plus{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.prod-price{
+    font-size: 1.3rem;
+    font-weight: 700;
+    color:#1a1510;
+    font-family: 'Cormorant Garamond', serif;
+}
+.prod-plusbtn{
+    background: #b8860b;
+    color: #FFF;
+    font-weight: 700;
+    font-size:1rem;
+    width:36px;
+    height:36px;
+    border-radius: 50%;
+    border:none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;  
+}
