@@ -6,7 +6,7 @@ export function AuthProvider({ children }) {
   const [loggedInUser, setLoggedInUser] = useState(
     JSON.parse(localStorage.getItem("loggedInUser")),
   );
-
+ 
   function login(user) {
     setLoggedInUser(user);
     localStorage.setItem("loggedInUser", JSON.stringify(user));

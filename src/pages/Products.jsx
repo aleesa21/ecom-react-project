@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../context/ProductContext";
-import "./Product.css"
+import "../css/Product.css"
+import { CartContext } from "../context/CartContext";
 
 export default function Products() {
   let {product}=useContext(ProductContext);
+  let {addToCart}=useContext(CartContext);
   return (
     <div className="product-page padding">
     <div className="productpage-top-sec">
@@ -39,7 +41,9 @@ export default function Products() {
             <div className="prod-rating">{item.rating.rate}({item.rating.count})</div>
             <div className="prod-price-plus">
               <div className="prod-price">${item.price}</div>
-              <button className="prod-plusbtn">+</button>
+              <button onClick={()=>{
+                addToCart(item)
+              }}className="prod-plusbtn">+</button>
             </div>
           </div>
         </div>

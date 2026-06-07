@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Header.css";
+import "../css/Header.css";
 import { Link } from "react-router";
 import { useContext } from "react"
 import { AuthContext } from "../context/AuthContext"
@@ -13,7 +13,7 @@ export default function Header() {
         <nav className="navbar">
             <div className="nav-left-logo">
           <div className="hamburger" onClick={()=>{setMenuopen(!menuopen)}}>
-            <img src="hamburger-menu.png" alt="cart-logo" />
+            <img src="hamburger-menu.png" alt="hamburger-menu" />
           </div>
           <div className="nav-logo"><span>MA</span>RT</div>
           </div>
@@ -36,7 +36,7 @@ export default function Header() {
               ♡
             </div>
             <div>
-              <img src="cart.png" alt="cart-logo" />
+              <Link to="/cart"><img src="cart.png" alt="cart-logo" /></Link>
             </div>
             {loggedInUser ?(
               <>

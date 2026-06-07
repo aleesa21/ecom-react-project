@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import "./Home.css";
+import "../css/Home.css";
 import { ProductContext } from "../context/ProductContext";
 export default function Home() {
   let { product } = useContext(ProductContext);

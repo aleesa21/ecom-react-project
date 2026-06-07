@@ -10,6 +10,8 @@ import Signup from "./components/Signup";
 import Loginlayout from "./components/Loginlayout";
 import { AuthProvider } from "./context/AuthContext";
 import { ProductProvider } from "./context/ProductContext";
+import Cart from "./components/Cart";
+import CartProvider from "./context/CartContext";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,10 @@ const router = createBrowserRouter([
         path: "/Products",
         element: <Products />,
       },
+      {
+        path:"/cart",
+        element:<Cart />
+      }
     ],
   },
   {
@@ -46,7 +52,9 @@ export default function App() {
     <>
       <AuthProvider>
         <ProductProvider>
+          <CartProvider>
           <RouterProvider router={router} />
+          </CartProvider>
         </ProductProvider>
       </AuthProvider>
     </>
