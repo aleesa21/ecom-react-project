@@ -3,7 +3,8 @@
     flex-direction: column;
     box-sizing: border-box;
     /* border: 1px solid yellow; */
-    height: 100%;
+     height: calc(100vh - 65px);
+
 }
 /* .top_emptycart{
     border: 1px solid black;

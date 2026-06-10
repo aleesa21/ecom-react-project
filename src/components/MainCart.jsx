@@ -1,13 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import "../css/mainCart.css";
 export default function MainCart() {
-  let { cart } = useContext(CartContext);
-  let count = 0;
+  let { cart, reduceQnty, increaseQnty, removeItem,clearCart,count } = useContext(CartContext);
+  
+  let ttl_price = 0;
   cart.forEach((item) => {
-    count = count + item.quantity;
+    ttl_price = ttl_price + item.quantity * item.price;
   });
-
+  let taxrate = 8;
+  let taxamt = ttl_price * (taxrate / 100);
   return (
     <div className="full_cart_page">
       <div className="top_fcp">
@@ -30,21 +32,83 @@ export default function MainCart() {
                 </div>
 
                 <div className="c-counts">
-                  <button className="item_count_btn">-</button>
+                  <button
+                    className="item_count_btn"
+                    onClick={() => {
+                      reduceQnty(item);
+                    }}
+                  >
+                    −
+                  </button>
                   <div className="c-quantity">{item.quantity}</div>
-                  <button className="item_count_btn">+</button>
+                  <button
+                    className="item_count_btn"
+                    onClick={() => {
+                      increaseQnty(item);
+                    }}
+                  >
+                    +
+                  </button>
                 </div>
                 <div className="c-total-price">
-                  ${item.quantity * item.price}
+                  ${(item.quantity * item.price).toFixed(2)}
                 </div>
-                <div className="c-clear-item">x</div>
+                <button
+                  className="c-clear-item"
+                  onClick={() => {
+                    removeItem(item);
+                  }}
+                >
+                  ✕
+                </button>
               </div>
             );
           })}
         </div>
-        {/* <div className="cart_order_summary">
-          <div className="order_card"></div>
-        </div> */}
+        <div className="cart_order_summary">
+          <div className="order_card">
+            <div className="order_smry">Order Summary</div>
+            <div className="oc_row">
+              <div>{count} items</div>
+              <div> ${ttl_price.toFixed(2)}</div>
+            </div>
+            <div className="oc_row shipping">
+              <div>shipping</div>
+              <span>Free</span>
+            </div>
+            <div className="oc_row">
+              <div>Tax ({taxrate}%)</div>
+              <div>${taxamt.toFixed(2)}</div>
+            </div>
+            <div className="">
+              <hr></hr>
+            </div>
+            <div className="oc_row total">
+              <div>Total</div>
+              <div>${(ttl_price + taxamt).toFixed(2)}</div>
+            </div>
+            <div className="promo-row">
+              <input
+                type="text"
+                className="promo-input"
+                placeholder="Promo code"
+              ></input>
+              <button className="apply_btn">Apply</button>
+            </div>
+            <div>
+              <button className="checkout_btn">Proceed to checkout</button>
+            </div>
+            <div className="clear_cart_btn" onClick={clearCart}>clear cart</div>
+            <div className="">
+              <hr></hr>
+            </div>
+            <div className="bottom_oc">
+              <span>🔒 Secure </span>
+              <span>↩ 30-day returns</span>
+              <span>🚚 Free shipping</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
