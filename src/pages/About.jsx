@@ -4,6 +4,3 @@ export default function About(){
 function Alisha({children}){
     return <>{children}</>
 }
-function Kafle(){
-    return<>alisha kafale</>
-}

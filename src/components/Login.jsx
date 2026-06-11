@@ -51,7 +51,7 @@ export default function Login() {
       if(!matchedUser){
         setFormerrors((prev)=>({
           ...prev,
-          password:"Incorrect Password"
+          pwerror:"Incorrect Password"
         }))
         return
       }
