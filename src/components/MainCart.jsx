@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
-import "../css/mainCart.css";
+import "../css/maincart.css";
 import { useNavigate } from "react-router";
 export default function MainCart() {
   let navigate = useNavigate();
