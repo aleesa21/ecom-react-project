@@ -10,8 +10,9 @@ import Signup from "./components/Signup";
 import Loginlayout from "./components/Loginlayout";
 import { AuthProvider } from "./context/AuthContext";
 import { ProductProvider } from "./context/ProductContext";
-import Cart from "./components/Cart";
+import Cart from "./pages/Cart";
 import CartProvider from "./context/CartContext";
+import Checkout from "./pages/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path:"/cart",
         element:<Cart />
+      },
+      {
+        path:"/checkout",
+        element:<Checkout />
       }
     ],
   },

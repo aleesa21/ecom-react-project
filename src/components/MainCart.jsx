@@ -1,7 +1,9 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import "../css/mainCart.css";
+import { useNavigate } from "react-router";
 export default function MainCart() {
+  let navigate = useNavigate();
   let { cart, reduceQnty, increaseQnty, removeItem, clearCart, count } =
     useContext(CartContext);
 
@@ -97,7 +99,12 @@ export default function MainCart() {
               <button className="apply_btn">Apply</button>
             </div>
             <div>
-              <button className="checkout_btn">Proceed to checkout</button>
+              <button
+                className="checkout_btn"
+                onClick={() => navigate("/checkout")}
+              >
+                Proceed to checkout
+              </button>
             </div>
             <div className="clear_cart_btn" onClick={clearCart}>
               clear cart
@@ -111,7 +118,7 @@ export default function MainCart() {
               <span>🚚 Free shipping</span>
             </div>
           </div>
-        </div> 
+        </div>
       </div>
     </div>
   );
