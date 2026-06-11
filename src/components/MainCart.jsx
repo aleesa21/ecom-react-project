@@ -2,8 +2,9 @@ import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import "../css/mainCart.css";
 export default function MainCart() {
-  let { cart, reduceQnty, increaseQnty, removeItem,clearCart,count } = useContext(CartContext);
-  
+  let { cart, reduceQnty, increaseQnty, removeItem, clearCart, count } =
+    useContext(CartContext);
+
   let ttl_price = 0;
   cart.forEach((item) => {
     ttl_price = ttl_price + item.quantity * item.price;
@@ -98,7 +99,9 @@ export default function MainCart() {
             <div>
               <button className="checkout_btn">Proceed to checkout</button>
             </div>
-            <div className="clear_cart_btn" onClick={clearCart}>clear cart</div>
+            <div className="clear_cart_btn" onClick={clearCart}>
+              clear cart
+            </div>
             <div className="">
               <hr></hr>
             </div>
@@ -108,7 +111,7 @@ export default function MainCart() {
               <span>🚚 Free shipping</span>
             </div>
           </div>
-        </div>
+        </div> 
       </div>
     </div>
   );
