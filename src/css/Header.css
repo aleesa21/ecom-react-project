@@ -80,6 +80,28 @@ font-weight: 500;
     background: #f0ede6;
 
 }
+.header-cart {
+    position: relative;
+}
+.header-cart span{
+    position: absolute;
+    color:red;
+    top:-5px;
+    right:-5px;
+    min-width: 17px;
+    height: 17px;
+    font-size: 9px;
+    font-weight: 700;
+    border-radius: 9px;
+    background: red;
+    color:white;
+    padding: 0 3px;
+    border:2px solid #f7f5f0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .header-login-btn{
     border:1px solid #e2ddd5;
     padding:0.45rem 1.1rem;

@@ -3,8 +3,10 @@ import "../css/Header.css";
 import { Link } from "react-router";
 import { useContext } from "react"
 import { AuthContext } from "../context/AuthContext"
+import { CartContext } from "../context/CartContext";
 export default function Header() {
   const { loggedInUser, logout } = useContext(AuthContext)
+  const {cart,count}=useContext(CartContext)
     const [menuopen,setMenuopen]=useState(false)
     console.log(menuopen)
   return (
@@ -35,8 +37,10 @@ export default function Header() {
             <div className="wishlist-icon">
               ♡
             </div>
-            <div>
+            <div className="header-cart">
               <Link to="/cart"><img src="cart.png" alt="cart-logo" /></Link>
+              {cart.length>0 && <span>{count}</span>}
+              
             </div>
             {loggedInUser ?(
               <>
