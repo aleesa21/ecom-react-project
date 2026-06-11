@@ -5,7 +5,12 @@ import { CartContext } from "../context/CartContext";
 
 export default function Products() {
   let {product}=useContext(ProductContext);
-  let {addToCart}=useContext(CartContext);
+  let {cart,addToCart}=useContext(CartContext);
+
+  
+  function checkincart(prod){
+ return cart.find((cartitem)=>cartitem.id===prod.id)
+  }
   return (
     <div className="product-page padding">
     <div className="productpage-top-sec">
@@ -26,7 +31,7 @@ export default function Products() {
             return  <div className="product" key={item.id}>
           <div className="product-top">
             <div>
-              <img
+              <img 
                 className="prod-img-home"
                 src={item.image}
                 alt={item.title}
@@ -41,9 +46,11 @@ export default function Products() {
             <div className="prod-rating">{item.rating.rate}({item.rating.count})</div>
             <div className="prod-price-plus">
               <div className="prod-price">${item.price}</div>
-              <button onClick={()=>{
+              <button 
+              style={{background: checkincart(item)?"green":"#b8860b"}}
+              onClick={()=>{
                 addToCart(item)
-              }}className="prod-plusbtn">+</button>
+              }}className="prod-plusbtn">{checkincart(item)?"✓" : "+"}</button>
             </div>
           </div>
         </div>
