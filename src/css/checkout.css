@@ -1,0 +1,21 @@
+.checkout{
+    background: #f7f5f0;
+    height: calc(100vh - 65px);
+}
+.top-checkout{
+    margin-top:20px;
+}
+.top-checkout h1{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    margin: 20px 0px 15px 0px;
+    font-weight: 300;
+}
+.down-checkout{
+    border:1px solid black;
+}
+@media only screen and (min-width: 768px) {
+.checkout_page{
+    margin:0px  50px;
+}
+}
