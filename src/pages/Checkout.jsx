@@ -1,10 +1,13 @@
+import { Link, useNavigate } from "react-router";
 import "../css/checkout.css";
 export default function Checkout() {
+  const navigate=useNavigate()
   return (
     <section className="checkout ">
       <div className="padding checkout_page">
         <div className="top-checkout">
-          <div>← Back to Cart</div>
+          <Link to="/cart">
+          <div>← Back to Cart</div></Link>
           <h1>Checkout</h1>
         </div>
         <div className="down-checkout">
