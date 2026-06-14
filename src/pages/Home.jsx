@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import "../css/Home.css";
 import { ProductContext } from "../context/ProductContext";
+import { useNavigate } from "react-router"
 export default function Home() {
-  let { product } = useContext(ProductContext);
-
+  const { product } = useContext(ProductContext);
+  let navigate= useNavigate();
   return (
     <>
       <main>
@@ -30,8 +31,12 @@ export default function Home() {
                   door.
                 </p>
                 <div className="hero-left-btns">
-                  <button className="explore-btn">Explore Collection</button>
-                  <button className="ourstory-btn">Our Story</button>
+                  <button className="explore-btn" onClick={()=>{
+                    navigate("/products")
+                  }}>Explore Collection</button>
+                  <button className="ourstory-btn" onClick={()=>{
+                    navigate("/about")
+                  }}>Our Story</button>
                 </div>
               </div>
               <div className="hero-right-sec">
@@ -70,7 +75,7 @@ export default function Home() {
           </div>
         </section>
         <section>
-          <div className="padding hr">
+          <div className="padding hr-home">
             <hr></hr>
           </div>
 
