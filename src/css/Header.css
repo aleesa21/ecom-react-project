@@ -52,10 +52,15 @@ header{
     display:none;
     font-weight:500;
 }
-.nav-links div{
+.nav-links a{
     font-family: 'Outfit', sans-serif;
 font-weight: 500;
     color:#4f4537;
+}
+.nav-links .active {
+    color:#b8860b;
+    /* transform: translateY(-5px);
+    transition: all 300ms ease-in-out ; */
 }
 .hamburger{
     cursor: pointer;

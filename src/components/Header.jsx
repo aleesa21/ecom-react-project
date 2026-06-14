@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../css/Header.css";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import { useContext } from "react"
 import { AuthContext } from "../context/AuthContext"
 import { CartContext } from "../context/CartContext";
@@ -19,13 +19,18 @@ export default function Header() {
           </div>
           <div className="nav-logo"><span>MA</span>RT</div>
           </div>
+
+
           <div className="nav-links">
-           <Link to="/"> <div>Home</div></Link>
-            <Link to="/products"><div>Products</div></Link>
-            <Link to=""><div>Wishlist</div></Link>
-            <Link to="/about"><div>About</div></Link>
-            {/* <Link to="/signup"><div>Sign Up</div></Link> */}
-          </div>
+           <NavLink to="/" end className={({isActive})=>isActive?"nav-link active":"nav-link"}> Home</NavLink>
+            <NavLink to="/products" className={({isActive})=>isActive?"nav-link active":"nav-link"}>Products</NavLink>
+            <NavLink to="/wishlist" className={({isActive})=>isActive?"nav-link active":"nav-link"}>Wishlist</NavLink>
+            <NavLink to="/about" className={({isActive})=>isActive?"nav-link active":"nav-link"}>About</NavLink>
+            {/* <Link to="/signup">Sign Up</Link> */}
+          </div> 
+
+
+
           <div className="search">
             <input type="text" placeholder="Search Products....." className="search-input" ></input>
             <button className="search-btn">🔍︎</button>

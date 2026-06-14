@@ -13,6 +13,7 @@ import { ProductProvider } from "./context/ProductContext";
 import Cart from "./pages/Cart";
 import CartProvider from "./context/CartContext";
 import Checkout from "./pages/Checkout";
+import Wishlist from "./pages/Wishlist";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path:"/wishlist",
+        element:<Wishlist />
       },
       {
         path: "/products",
