@@ -46,6 +46,7 @@
 }
 .si_name{
     display: flex;
+    flex-wrap: wrap;
     gap:13px;
     width: 100%;
     /* border:1px solid red; */
@@ -77,6 +78,7 @@
 }
 .city_zip{
     display: flex;
+    flex-wrap: wrap;
     gap:13px;
 }
 
@@ -85,7 +87,11 @@
     height: 1px;
     margin:28px 0px;
 }
-
+.si_expiry-ccv{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+}
 
 
 
