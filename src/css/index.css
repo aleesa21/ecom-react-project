@@ -1,3 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    /* box-sizing: border-box; */
+}
+
 p{
     margin:0;
+}
+::-webkit-scrollbar{
+    width: 5px;
+}
+::-webkit-scrollbar-track{
+    background: #f0ede6;
+}
+::-webkit-scrollbar-thumb{
+    background: #d4a017;
+    border-radius: 5px;
 }
