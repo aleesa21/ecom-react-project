@@ -2,6 +2,13 @@ import { Link, useNavigate } from "react-router";
 import "../css/checkout.css";
 import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
+
+
+
+function isValidCardNumber(cardno){
+const removedspace=cardno.replace(/\s/g,"");
+}
+
 export default function Checkout() {
   const { cart } = useContext(CartContext);
   const [popup, setPopup] = useState({ show: false, msg: "" });
@@ -68,6 +75,8 @@ export default function Checkout() {
     if (emptypayment || emptyshipping) {
       handlepopup("please fill the required values");
     } else {
+      isValidCardNumber(payment_details.cardno);
+      navigate("/orderplaced")
       console.log(shipping_info);
       console.log(payment_details);
     }

@@ -14,6 +14,7 @@ import Cart from "./pages/Cart";
 import CartProvider from "./context/CartContext";
 import Checkout from "./pages/Checkout";
 import Wishlist from "./pages/Wishlist";
+import OrderConfirm from "./pages/OrderConfirm";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path:"/checkout",
         element:<Checkout />
+      },
+      {
+        path:"/orderplaced",
+        element:<OrderConfirm />
       }
     ],
   },
