@@ -1,10 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import "../css/Home.css";
 import { ProductContext } from "../context/ProductContext";
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router";
+import { CartContext } from "../context/CartContext";
 export default function Home() {
   const { product } = useContext(ProductContext);
-  let navigate= useNavigate();
+  let navigate = useNavigate();
+  const {cart, addToCart } = useContext(CartContext);
+  
+  function checkincart(prod){
+ return cart.find((cartitem)=>cartitem.id===prod.id)
+  }
   return (
     <>
       <main>
@@ -31,12 +37,22 @@ export default function Home() {
                   door.
                 </p>
                 <div className="hero-left-btns">
-                  <button className="explore-btn" onClick={()=>{
-                    navigate("/products")
-                  }}>Explore Collection</button>
-                  <button className="ourstory-btn" onClick={()=>{
-                    navigate("/about")
-                  }}>Our Story</button>
+                  <button
+                    className="explore-btn"
+                    onClick={() => {
+                      navigate("/products");
+                    }}
+                  >
+                    Explore Collection
+                  </button>
+                  <button
+                    className="ourstory-btn"
+                    onClick={() => {
+                      navigate("/about");
+                    }}
+                  >
+                    Our Story
+                  </button>
                 </div>
               </div>
               <div className="hero-right-sec">
@@ -129,29 +145,34 @@ export default function Home() {
             </div>
             <div className="poducts-container">
               {product.slice(0, 8).map((item) => {
-                return <div className="product" key={item.id}>
-          <div className="product-top">
-            <div>
-              <img
-                className="prod-img-home"
-                src={item.image}
-                alt={item.title}
-              ></img>
-            </div>
-          </div>
-          <div className="product-bottom">
-            <div className="prod-category">{item.category}</div>
-            <div className="prod-title">
-              {item.title}
-            </div>
-            <div className="prod-rating">{item.rating.rate}({item.rating.count})</div>
-            <div className="prod-price-plus">
-              <div className="prod-price">${item.price}</div>
-              <button className="prod-plusbtn">+</button>
-            </div>
-          </div>
-        </div>
-                  
+                return (
+                  <div className="product" key={item.id}>
+                    <div className="product-top">
+                      <div>
+                        <img
+                          className="prod-img-home"
+                          src={item.image}
+                          alt={item.title}
+                        ></img>
+                      </div>
+                    </div>
+                    <div className="product-bottom">
+                      <div className="prod-category">{item.category}</div>
+                      <div className="prod-title">{item.title}</div>
+                      <div className="prod-rating">
+                        {item.rating.rate}({item.rating.count})
+                      </div>
+                      <div className="prod-price-plus">
+                        <div className="prod-price">${item.price}</div>
+                        <button 
+                        style={{background: checkincart(item)?"green":"#b8860b"}}
+                        onClick={()=>{
+                          addToCart(item)
+                        }}className="prod-plusbtn">{checkincart(item)?"✓" : "+"}</button>
+                      </div>
+                    </div>
+                  </div>
+                );
               })}
             </div>
           </div>
