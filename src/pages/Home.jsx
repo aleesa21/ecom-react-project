@@ -3,13 +3,22 @@ import "../css/Home.css";
 import { ProductContext } from "../context/ProductContext";
 import { useNavigate } from "react-router";
 import { CartContext } from "../context/CartContext";
+import { useState } from "react";
 export default function Home() {
   const { product } = useContext(ProductContext);
+  const [filter, setFilter] = useState("all");
   let navigate = useNavigate();
-  const {cart, addToCart } = useContext(CartContext);
-  
-  function checkincart(prod){
- return cart.find((cartitem)=>cartitem.id===prod.id)
+  const { cart, addToCart } = useContext(CartContext);
+  const categories = ["All",...new Set(product.map((prod) => prod.category))];
+
+  const filtered =
+    filter.toLocaleLowerCase() === "all"
+      ? product
+      : product?.filter(
+          (prod) => prod.category.toLowerCase() == filter.toLowerCase(),
+        );
+  function checkincart(prod) {
+    return cart.find((cartitem) => cartitem.id === prod.id);
   }
   return (
     <>
@@ -23,12 +32,7 @@ export default function Home() {
                 </div>
                 <h1 className="discover-text">
                   Discover <br />
-                  <i
-                    className="
-                golden"
-                  >
-                    Extraordinary
-                  </i>
+                  <i className="golden">Extraordinary</i>
                   <br /> Products
                 </h1>
                 <p>
@@ -137,14 +141,22 @@ export default function Home() {
               Featured <span>Products</span>
             </div>
             <div className="select-list">
-              <div className="filter-list">✦ All</div>
-              <div className="filter-list">Men's clothing</div>
-              <div className="filter-list">Jwellery</div>
-              <div className="filter-list">Electronics</div>
-              <div className="filter-list">Women's Clothing</div>
+             
+              {categories.map((cat) => {
+                return (
+                  <button key={cat}
+                    className={`filter-list ${filter===cat?"filter-active":""}`}
+                    onClick={() => {
+                      setFilter(cat);
+                    }}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
             </div>
             <div className="poducts-container">
-              {product.slice(0, 8).map((item) => {
+              {filtered.slice(0, 8).map((item) => {
                 return (
                   <div className="product" key={item.id}>
                     <div className="product-top">
@@ -164,11 +176,17 @@ export default function Home() {
                       </div>
                       <div className="prod-price-plus">
                         <div className="prod-price">${item.price}</div>
-                        <button 
-                        style={{background: checkincart(item)?"green":"#b8860b"}}
-                        onClick={()=>{
-                          addToCart(item)
-                        }}className="prod-plusbtn">{checkincart(item)?"✓" : "+"}</button>
+                        <button
+                          style={{
+                            background: checkincart(item) ? "green" : "#b8860b",
+                          }}
+                          onClick={() => {
+                            addToCart(item);
+                          }}
+                          className="prod-plusbtn"
+                        >
+                          {checkincart(item) ? "✓" : "+"}
+                        </button>
                       </div>
                     </div>
                   </div>

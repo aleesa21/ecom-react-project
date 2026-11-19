@@ -202,11 +202,18 @@
      margin-bottom: 2rem;
 }
 .filter-list{
-    border: 1px solid black;
+    border: 1px solid #b8860b;
     padding:0.45rem 1rem;
     border-radius: 50px;
     font-size:0.8rem;
-
+}
+.filter-active{
+    border:1px slid black;
+    padding:0.45rem 1rem;
+    border-radius:50px;
+    font-size:0.8rem;
+    background:#b8860b;
+    color: white;
 }
  /* product-list ko css chai product.css page kai same ho hai  */
 
