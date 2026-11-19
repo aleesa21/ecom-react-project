@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+
+.order-confirm-page {
+  min-height: calc(100vh - 80px); 
+  background-color: #fbf8f1; 
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1f1f1f;
+}
+
+.order-confirm-container {
+  max-width: 100vw;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Party Popper Icon */
+.order-confirm-icon {
+  font-size: 4.2rem;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+  user-select: none;
+}
+
+/* "Order Confirmed!" Heading */
+.order-confirm-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2.75rem;
+  font-weight: 500;
+  color: #181818;
+  margin: 0 0 1.25rem 0;
+  letter-spacing: 0.01em;
+}
+
+/* Order Number Pill Box */
+.order-number-box {
+  width: 100%;
+  max-width: 480px;
+  background-color: #fdfbf6;
+  border: 1px solid #e6d3a7;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.75rem;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.25rem;
+  box-shadow: 0 2px 6px rgba(196, 146, 20, 0.04);
+}
+
+.order-number-label {
+  color: #2b2b2b;
+  font-weight: 500;
+}
+
+.order-number-value {
+  color: #b88914; /* Gold accent color */
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* Subtitle Paragraph */
+.order-confirm-message {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #4a4a4a;
+  max-width: 470px;
+  margin: 0 0 2rem 0;
+}
+
+.brand-name {
+  font-weight: 700;
+  color: #1f1f1f;
+  letter-spacing: 0.04em;
+}
+
+/* Pill CTA Button */
+.continue-shopping-btn {
+  background-color: #c29115;
+  color: #ffffff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.95rem 2.35rem;
+  border: none;
+  border-radius: 9999px; 
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.continue-shopping-btn:hover {
+  background-color: #a97d10;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(194, 145, 21, 0.25);
+}
+
+.continue-shopping-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+  .order-confirm-title {
+    font-size: 2.2rem;
+  }
+
+  .order-number-box {
+    padding: 0.85rem 1rem;
+    font-size: 1.1rem;
+  }
+}

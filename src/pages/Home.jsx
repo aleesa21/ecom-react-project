@@ -145,7 +145,7 @@ export default function Home() {
               {categories.map((cat) => {
                 return (
                   <button key={cat}
-                    className={`filter-list ${filter===cat?"filter-active":""}`}
+                    className={`filter-list ${filter.toLowerCase()===cat.toLowerCase()?"filter-active":""}`}
                     onClick={() => {
                       setFilter(cat);
                     }}
