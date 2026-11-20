@@ -10,7 +10,7 @@ const removedspace=cardno.replace(/\s/g,"");
 }
 
 export default function Checkout() {
-  const { cart } = useContext(CartContext);
+  const { cart,clearCart } = useContext(CartContext);
   const [popup, setPopup] = useState({ show: false, msg: "" });
   const navigate = useNavigate();
 
@@ -76,6 +76,8 @@ export default function Checkout() {
       handlepopup("please fill the required values");
     } else {
       isValidCardNumber(payment_details.cardno);
+      clearCart();
+      
       navigate("/orderplaced")
       console.log(shipping_info);
       console.log(payment_details);

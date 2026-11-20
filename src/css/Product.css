@@ -34,7 +34,16 @@
     font-size:0.8rem;
     background-color: white;
     font-size:0.8rem;
+    text-transform: capitalize;
 
+}
+.p-active{
+    border:1px slid black;
+    padding:0.45rem 1rem;
+    border-radius:50px;
+    font-size:0.8rem;
+    background:#b8860b;
+    color: white;
 }
 
 .poducts-container{
