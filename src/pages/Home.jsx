@@ -4,6 +4,7 @@ import { ProductContext } from "../context/ProductContext";
 import { useNavigate } from "react-router";
 import { CartContext } from "../context/CartContext";
 import { useState } from "react";
+import Hero from "../components/Hero";
 export default function Home() {
   const { product } = useContext(ProductContext);
   const [filter, setFilter] = useState("all");
@@ -23,77 +24,7 @@ export default function Home() {
   return (
     <>
       <main>
-        <section>
-          <div className="hero-section">
-            <div className="hero-main-section">
-              <div className="hero-left-sec">
-                <div className="golden newarrival-text">
-                  New Season Arrivals
-                </div>
-                <h1 className="discover-text">
-                  Discover <br />
-                  <i className="golden">Extraordinary</i>
-                  <br /> Products
-                </h1>
-                <p>
-                  Curated collections from around the world. Premium quality,
-                  unbeatable prices — everything you desire, delivered to your
-                  door.
-                </p>
-                <div className="hero-left-btns">
-                  <button
-                    className="explore-btn"
-                    onClick={() => {
-                      navigate("/products");
-                    }}
-                  >
-                    Explore Collection
-                  </button>
-                  <button
-                    className="ourstory-btn"
-                    onClick={() => {
-                      navigate("/about");
-                    }}
-                  >
-                    Our Story
-                  </button>
-                </div>
-              </div>
-              <div className="hero-right-sec">
-                <div className="floating-container">
-                  <div className="floating-child fc1">
-                    <img
-                      src="f1.png"
-                      alt="image"
-                      className="image-card-home"
-                    ></img>
-                  </div>
-                  <div className="floating-child fc2">
-                    <img
-                      src="f2.png"
-                      alt="image"
-                      className="image-card-home"
-                    ></img>
-                  </div>
-                  <div className="floating-child fc3">
-                    <img
-                      src="f3.png"
-                      alt="image"
-                      className="image-card-home"
-                    ></img>
-                  </div>
-                  <div className="floating-child fc4">
-                    <img
-                      src="f4.png"
-                      alt="image"
-                      className="image-card-home"
-                    ></img>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+     <Hero />
         <section>
           <div className="padding hr-home">
             <hr></hr>
