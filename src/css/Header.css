@@ -1,182 +1,329 @@
-html,body{
-    padding:0;
-    margin:0;
+html,
+body {
+  padding: 0;
+  margin: 0;
 }
-a{
-    text-decoration: none;
-    color:black;
-}
-header{
-    top:0;
-    position: sticky;
-    z-index:100;
-}
-.nav-logo{
-    font-size: 2rem;
-    font-family:'Cormorant Garamond', serif;
-    font-weight: 700;
-    color:#b8860b;
-}
-.nav-logo span{
-    color:#1a1510;
-}
-.navbar{
-    font-family: 'Outfit', sans-serif;
-    display:flex;
-    align-items: center;
-    justify-content: space-between;
-    padding:0.5rem ;
-    border:1px solid #e2ddd5;
-    background: #f7f5f0;
-    
-}
-.nav-right-logo{
-    display:flex;
-    align-items: center;
-    gap:10px;
-}
-.logout-and-name{
-    display:none;
-    align-items: center;
-    gap:10px;
-}
-.logout-and-name span{
-    color:#b8860b;
-}
-.nav-left-logo{
-    display: flex;
-    gap:10px;
-    align-items: center;
-}
-.nav-links{
-    display:none;
-    font-weight:500;
-}
-.nav-links a{
-    font-family: 'Outfit', sans-serif;
-font-weight: 500;
-    color:#4f4537;
-}
-.nav-links .active {
-    color:#b8860b;
-    /* transform: translateY(-5px);
-    transition: all 300ms ease-in-out ; */
-}
-.hamburger{
-    cursor: pointer;
-}
-.search{
-    display: none;
-}
-.search-input{
-    padding:0.5rem 4rem 0.5rem 0.5rem;
-    border-radius:  6px 0 0 6px;
-    border:none;
-    background: #f0ede6;
-}
-.search-input:focus{
-    outline: none;
-}
-.search-btn{
-    padding:0.5rem 0.7rem 0.5rem 0.5rem;
-    border:none;
-    font-size:1.05rem;
-    border-radius:0 6px 6px 0;
-    background: #f0ede6;
-
-}
-.header-cart {
-    position: relative;
-}
-.header-cart span{
-    position: absolute;
-    color:red;
-    top:-5px;
-    right:-5px;
-    min-width: 17px;
-    height: 17px;
-    font-size: 9px;
-    font-weight: 700;
-    border-radius: 9px;
-    background: red;
-    color:white;
-    padding: 0 3px;
-    border:2px solid #f7f5f0;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.header-login-btn{
-    border:1px solid #e2ddd5;
-    padding:0.45rem 1.1rem;
-    border-radius:50px;
-    background:none;
-    display: none;
-}
-.nav-logout-btn{
-     border:1px solid #e2ddd5;
-    padding:0.45rem 1.1rem;
-    border-radius:50px;
-    background:none;
-    
-}
-.header-signup-btn{
-     border:1px solid #b8860b;
-    padding:0.45rem 1.1rem;
-    border-radius:50px;
-    color:white;
-    background: #b8860b;
-    display: none;
-}
-.wishlist-icon{
-    border:1px solid #e2ddd5;
-    padding:0.2rem 0.45rem;
-    border-radius: 5px;
+a {
+  text-decoration: none;
+  color: black;
 }
 
+/*
+  Two looks:
+  1) default (other pages, and below the hero): dark #1a1510 with cream text
+  2) .on-hero (home page while the hero is behind the header): takes the
+     hero's current colour, which Hero.jsx publishes as --hero-bg / --hero-ink
+*/
+header {
+  top: 0;
+  position: sticky;
+  z-index: 100;
+  --h-bg: #f7f5f0;
+  --h-ink: #1a1510;
+  --h-accent: #1a1510;
+  --h-on-accent: #f7f5f0;
+}
+header.on-hero {
+  --h-bg: var(--hero-bg, #c9cfd4);
+  --h-ink: var(--hero-ink, #16191c);
+  --h-accent: var(--h-ink);
+  --h-on-accent: var(--h-bg);
+}
+
+.navbar {
+  font-family: "Outfit", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  background: var(--h-bg);
+  color: var(--h-ink);
+  border-bottom: 1px solid color-mix(in srgb, var(--h-ink) 12%, transparent);
+  transition: background-color 700ms ease, color 700ms ease, border-color 300ms ease;
+}
+/* on the hero the header blends in; a line appears once you scroll */
+header.on-hero:not(.scrolled) .navbar {
+  border-bottom-color: transparent;
+}
+
+/* ---------- logo ---------- */
+.nav-left-logo {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.nav-logo {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--h-ink);
+  transition: color 700ms ease;
+}
+.nav-logo span {
+  color: var(--h-ink);
+}
+.nav-logo em {
+  font-style: italic;
+  color: var(--h-ink);
+}
+
+/* ---------- links ---------- */
+.nav-links {
+  display: none;
+  gap: 1.9rem;
+  font-weight: 500;
+}
+.nav-link {
+  position: relative;
+  padding: 0.5rem 0;
+  color: color-mix(in srgb, var(--h-ink) 65%, transparent);
+  transition: color 250ms ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.1rem;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.nav-link:hover {
+  color: var(--h-ink);
+}
+.nav-link:hover::after {
+  transform: scaleX(0.4);
+}
+.nav-link.active {
+  color: var(--h-ink);
+}
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* ---------- search ---------- */
+.search {
+  display: none;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+}
+.search-input {
+  width: 12rem;
+  padding: 0.65rem 2.8rem 0.65rem 1.1rem;
+  border: 1.5px solid transparent;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--h-ink) 9%, transparent);
+  color: var(--h-ink);
+  font: 500 0.9rem "Outfit", sans-serif;
+  transition: width 350ms ease, border-color 250ms ease, background-color 250ms ease;
+}
+.search-input::placeholder {
+  color: color-mix(in srgb, var(--h-ink) 55%, transparent);
+}
+.search-input:focus {
+  outline: none;
+  width: 15rem;
+  border-color: var(--h-ink);
+  background: color-mix(in srgb, var(--h-ink) 5%, transparent);
+}
+.search-btn {
+  position: absolute;
+  right: 0.3rem;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--h-ink);
+  cursor: pointer;
+}
+
+/* ---------- right side ---------- */
+.nav-right-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.icon-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--h-ink);
+  cursor: pointer;
+  transition: background-color 250ms ease;
+}
+.icon-btn:hover {
+  background: color-mix(in srgb, var(--h-ink) 10%, transparent);
+}
+
+.header-cart span {
+  position: absolute;
+  top: 1px;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  box-sizing: border-box;
+  border: 2px solid var(--h-bg);
+  border-radius: 9px;
+  background: var(--h-accent);
+  color: var(--h-on-accent);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.header-login-btn,
+.header-signup-btn,
+.nav-logout-btn {
+  display: none;
+  align-items: center;
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  font: 600 0.9rem "Outfit", sans-serif;
+  cursor: pointer;
+  transition: transform 250ms ease, background-color 250ms ease, color 250ms ease,
+    border-color 250ms ease;
+}
+.header-login-btn,
+.nav-logout-btn {
+  border: 1.5px solid color-mix(in srgb, var(--h-ink) 40%, transparent);
+  background: transparent;
+  color: var(--h-ink);
+}
+.header-login-btn:hover,
+.nav-logout-btn:hover {
+  border-color: var(--h-ink);
+  background: var(--h-ink);
+  color: var(--h-bg);
+}
+.header-signup-btn {
+  border: 1.5px solid var(--h-accent);
+  background: var(--h-accent);
+  color: var(--h-on-accent);
+}
+.header-signup-btn:hover {
+  transform: translateY(-1px);
+}
+.nav-logout-btn {
+  display: inline-flex;
+}
+
+.logout-and-name {
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+.logout-and-name span {
+  font-weight: 500;
+}
+
+/* ---------- mobile menu ---------- */
+.mobile-menu {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  background: var(--h-bg);
+  color: var(--h-ink);
+  transition: grid-template-rows 400ms ease, background-color 700ms ease,
+    visibility 0s 400ms;
+}
+.mobile-menu.open {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition-delay: 0s;
+  border-bottom: 1px solid color-mix(in srgb, var(--h-ink) 12%, transparent);
+}
+.mobile-menu-inner {
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+}
+.mobile-menu.open .mobile-menu-inner {
+  padding-bottom: 1rem;
+}
+.mobile-menu a {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--h-ink) 12%, transparent);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--h-ink);
+}
+
+/* ---------- responsive ---------- */
+.search-icon {
+  display: grid;
+}
 @media only screen and (min-width: 600px) {
-.navbar{
+  .navbar {
     padding: 0.75rem 2rem;
-}
+  }
 }
 @media only screen and (min-width: 768px) {
-    .mobile-menu{
-        display: none;
-    }
-    .search-icon{
-        display: none;
-    }
-    .search{
-        display:flex;
-    }
-    .search-input{
-    padding:0.7rem 6rem 0.7rem 0.5rem;
-}
-/* .nav-left-logo{
-    
-    gap:20px;
-   
-} */
+  .mobile-menu {
+    display: none;
+  }
+  .search-icon {
+    display: none;
+  }
+  .search {
+    display: flex;
+  }
 }
 @media only screen and (min-width: 992px) {
-.nav-links{
-        display:flex;
-        gap:2rem;
-    }
-     .hamburger{
-        display:none;
-    }
-.header-login-btn{
-    display: block;
-}
-.header-signup-btn{
-    display: block;
-}
-.wishlist-icon{
-    display: none;
-}
-.logout-and-name{
+  .nav-links {
     display: flex;
+  }
+  .hamburger {
+    display: none;
+  }
+  .header-login-btn,
+  .header-signup-btn {
+    display: inline-flex;
+  }
+  .wishlist-icon {
+    display: none;
+  }
+  .logout-and-name {
+    display: flex;
+  }
 }
+@media only screen and (min-width: 1200px) {
+  .search-input {
+    width: 15rem;
+  }
+  .search-input:focus {
+    width: 18rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .nav-logo,
+  .mobile-menu,
+  .search-input {
+    transition: none;
+  }
 }

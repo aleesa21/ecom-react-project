@@ -1,44 +1,41 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import "../css/Hero.css";
 
-
+/*
+  Edit this list: one entry per image.
+  bg     = hero background when this product is in front
+  ink    = text colour on that background
+  colour = the big word behind the products + the little label in the pill
+*/
 const PRODUCTS = [
   {
-    img: "f1.png",
+    img: "p1.png",
     name: "Stone Tee",
-    word: "Stone",
-    bg: "#cfd4d8",
+    colour: "Stone",
+    bg: "#c9cfd4",
     ink: "#16191c",
-    price: "$24",
-    details: [["Fabric", "Heavyweight cotton"], ["Fit", "Relaxed, boxy"]],
   },
   {
-    img: "f2.png",
+    img: "p2.png",
     name: "Sage Linen Shirt",
-    word: "Linen",
-    bg: "#cfd9c3",
+    colour: "Sage",
+    bg: "#c8d6bb",
     ink: "#18230f",
-    price: "$42",
-    details: [["Fabric", "Washed linen blend"], ["Fit", "Easy, button-down"]],
   },
   {
-    img: "f3.png",
+    img: "p3.png",
     name: "Sunset Print Tee",
-    word: "Sunset",
-    bg: "#f2c6a8",
+    colour: "Sunset",
+    bg: "#eebd9f",
     ink: "#3a1707",
-    price: "$28",
-    details: [["Print", "Hand-finished graphic"], ["Fit", "Regular"]],
   },
   {
-    img: "f4.png",
+    img: "p4.png",
     name: "Washed Denim Shorts",
-    word: "Denim",
-    bg: "#c3d5e8",
+    colour: "Denim",
+    bg: "#b9cee4",
     ink: "#0d2037",
-    price: "$36",
-    details: [["Fabric", "Stone-washed denim"], ["Fit", "Straight, knee-length"]],
   },
 ];
 
@@ -50,27 +47,32 @@ export default function Hero() {
   const navigate = useNavigate();
   const [active, setActive] = useState(0);
 
+  const heroRef = useRef(null);
   const stageRef = useRef(null);
   const cardRefs = useRef([]);
   const stepRef = useRef(0);
   const angleRef = useRef(0);
   const rafRef = useRef(null);
-  const sizeRef = useRef({ rx: 180, ry: 55, base: 50 });
+  const sizeRef = useRef({ rx: 180, ry: 80, base: 30 });
 
+  /* place every card on the ring */
   const paint = useCallback(() => {
     const { rx, ry, base } = sizeRef.current;
     cardRefs.current.forEach((el, i) => {
       if (!el) return;
       const theta = ((i * STEP_DEG - angleRef.current) * Math.PI) / 180;
       const depth = Math.cos(theta); // 1 front, -1 back
-      const t = (depth + 1) / 2;
+      const t = (depth + 1) / 2; // 0..1
 
       const x = Math.sin(theta) * rx;
       const y = (1 - depth) * -ry + base;
-      const scale = 0.58 + 0.42 * t;
+      const scale = 0.55 + 0.45 * t;
+      const turn = -Math.sin(theta) * 30; // side cards turn towards the centre
+      const lean = Math.sin(theta) * 3;
 
-      el.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${scale})`;
-      el.style.opacity = String(0.5 + 0.5 * t);
+      el.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) perspective(1200px) rotateY(${turn}deg) rotate(${lean}deg) scale(${scale})`;
+      el.style.opacity = String(0.72 + 0.28 * t);
+      el.style.filter = `blur(${((1 - t) * 2.2).toFixed(2)}px)`;
       el.style.zIndex = String(Math.round(t * 10));
     });
   }, []);
@@ -84,7 +86,7 @@ export default function Hero() {
       rafRef.current = null;
       return;
     }
-    angleRef.current += diff * 0.11;
+    angleRef.current += diff * 0.1;
     paint();
     rafRef.current = requestAnimationFrame(animate);
   }, [paint]);
@@ -104,14 +106,35 @@ export default function Hero() {
     [animate, paint]
   );
 
-  // size the ring from the stage so it works on every screen
+  /* hero height = screen height - whatever sits above it (your navbar) */
+  useEffect(() => {
+    const setNavHeight = () => {
+      const el = heroRef.current;
+      if (!el) return;
+      const top = el.getBoundingClientRect().top + window.scrollY;
+      if (top > 0) el.style.setProperty("--nav-h", `${Math.round(top)}px`);
+    };
+    setNavHeight();
+    window.addEventListener("resize", setNavHeight);
+    return () => window.removeEventListener("resize", setNavHeight);
+  }, []);
+
+  /* size the ring from the stage so it fits every screen */
   useEffect(() => {
     const el = stageRef.current;
     if (!el) return;
     const measure = () => {
       const w = el.clientWidth;
       const h = el.clientHeight;
-      sizeRef.current = { rx: w * 0.3, ry: w * 0.085, base: h * 0.09 };
+      const size = Math.min(w * 0.8, h * 1.0);
+      const base = h * 0.07;
+      el.style.setProperty("--card", `${size}px`);
+      el.style.setProperty("--base", `${base}px`);
+      sizeRef.current = {
+        rx: Math.min(w * 0.45, w / 2 - size * 0.25),
+        ry: h * 0.17,
+        base,
+      };
       paint();
     };
     measure();
@@ -123,7 +146,7 @@ export default function Hero() {
     };
   }, [paint]);
 
-  // wheel over the stage rotates the ring
+  /* wheel over the ring rotates it */
   useEffect(() => {
     const el = stageRef.current;
     if (!el) return;
@@ -159,6 +182,21 @@ export default function Hero() {
     if (e.key === "ArrowLeft" || e.key === "ArrowUp") rotate(-1);
   };
 
+  const onPointerMove = (e) => {
+    if (e.pointerType !== "mouse") return;
+    const el = stageRef.current;
+    const r = el.getBoundingClientRect();
+    const nx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+    const ny = ((e.clientY - r.top) / r.height - 0.5) * 2;
+    el.style.setProperty("--ty", `${(nx * 8).toFixed(2)}deg`);
+    el.style.setProperty("--tx", `${(-ny * 6).toFixed(2)}deg`);
+  };
+  const onPointerLeave = () => {
+    const el = stageRef.current;
+    el.style.setProperty("--ty", "0deg");
+    el.style.setProperty("--tx", "0deg");
+  };
+
   const goTo = (index) => {
     let offset = mod(index - stepRef.current, COUNT);
     if (offset > COUNT / 2) offset -= COUNT;
@@ -167,58 +205,80 @@ export default function Hero() {
 
   const p = PRODUCTS[active];
 
+  // share the current colours with the header
+  useLayoutEffect(() => {
+    const root = document.documentElement;
+    root.style.setProperty("--hero-bg", p.bg);
+    root.style.setProperty("--hero-ink", p.ink);
+  }, [p.bg, p.ink]);
+
   return (
-    <section
-      className="hero"
-      style={{ "--bg": p.bg, "--ink": p.ink }}
-    >
-      {/* big word behind everything */}
+    <section className="hero" ref={heroRef} style={{ "--bg": p.bg, "--ink": p.ink }}>
+      {/* giant word behind the products */}
       <div className="hero-ghost" aria-hidden="true">
         {PRODUCTS.map((item, i) => (
           <span
-            key={item.word}
+            key={item.colour}
             className={`ghost-word ${i === active ? "is-active" : ""}`}
           >
-            {item.word}
+            {item.colour}
           </span>
         ))}
       </div>
 
-      {/* small shop card, top right */}
-      <div className="hero-pick">
-        <img src={p.img} alt="" />
-        <div className="hero-pick-info">
-          <span className="hero-pick-name">{p.name}</span>
-          <span className="hero-pick-price">{p.price}</span>
-        </div>
-        <button type="button" onClick={() => navigate("/products")}>
-          Shop now
-        </button>
+      <div className="hero-rail" role="group" aria-label="Choose a product">
+        {PRODUCTS.map((item, i) => (
+          <button
+            key={item.img}
+            type="button"
+            className={`rail-dot ${i === active ? "is-active" : ""}`}
+            onClick={() => goTo(i)}
+            aria-label={`Show ${item.name}`}
+            aria-pressed={i === active}
+          />
+        ))}
+        <span className="rail-label">
+          <span className="hint-desktop">Scroll</span>
+          <span className="hint-touch">Swipe</span>
+        </span>
+        <span className="rail-cue" aria-hidden="true" />
       </div>
 
       <div className="hero-top">
         <div className="hero-copy">
-          <p className="hero-eyebrow">New season arrivals</p>
-          <h1 className="hero-title">
-            Discover extraordinary products
-          </h1>
-          <p className="hero-text">
-            Curated collections from around the world. Premium quality,
-            unbeatable prices, delivered to your door.
+          <p className="hero-eyebrow">
+            Colour of the moment
+            <b className="eyebrow-colour" key={p.colour}>
+              {p.colour}
+            </b>
           </p>
+
+          <h1 className="hero-title" aria-label="Colour your everyday.">
+            <span className="t-line" aria-hidden="true">
+              <span className="t-inner">
+                <span className="t-grad">Colour</span> your
+              </span>
+            </span>
+            <span className="t-line" aria-hidden="true">
+              <span className="t-inner t-serif">everyday.</span>
+            </span>
+          </h1>
+
+          <p className="hero-text">
+            Tees, shirts and shorts in colours that move with you. Premium
+            quality, honest prices, delivered to your door.
+          </p>
+
           <div className="hero-btns">
-            <button
-              type="button"
-              className="btn-solid"
-              onClick={() => navigate("/products")}
-            >
+            <button type="button" className="btn-solid" onClick={() => navigate("/products")}>
               Explore collection
+              <span className="btn-arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </span>
             </button>
-            <button
-              type="button"
-              className="btn-line"
-              onClick={() => navigate("/about")}
-            >
+            <button type="button" className="btn-line" onClick={() => navigate("/about")}>
               Our story
             </button>
           </div>
@@ -235,52 +295,28 @@ export default function Hero() {
             onKeyDown={onKeyDown}
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
+            onPointerMove={onPointerMove}
+            onPointerLeave={onPointerLeave}
           >
-            <div className="orbit-layer">
-              {PRODUCTS.map((item, i) => (
-                <button
-                  key={item.img}
-                  type="button"
-                  className="orbit-card"
-                  ref={(el) => (cardRefs.current[i] = el)}
-                  onClick={() => goTo(i)}
-                  aria-label={item.name}
-                  tabIndex={-1}
-                >
-                  <img src={item.img} alt={item.name} draggable="false" />
-                </button>
-              ))}
-            </div>
+            {PRODUCTS.map((item, i) => (
+              <button
+                key={item.img}
+                type="button"
+                className="orbit-card"
+                ref={(el) => (cardRefs.current[i] = el)}
+                onClick={() => goTo(i)}
+                aria-label={item.name}
+                tabIndex={-1}
+              >
+                <span className="orbit-shadow" style={{ animationDelay: `${i * -1.3}s` }} />
+                <span className="orbit-bob" style={{ animationDelay: `${i * -1.3}s` }}>
+                  <span className="orbit-tilt">
+                    <img src={item.img} alt={item.name} draggable="false" />
+                  </span>
+                </span>
+              </button>
+            ))}
           </div>
-          <p className="orbit-hint">Scroll to rotate</p>
-        </div>
-      </div>
-
-      <div className="hero-bottom">
-        <div className="hero-name">
-          <h2 key={p.name}>{p.name}</h2>
-        </div>
-
-        {p.details.map(([label, value]) => (
-          <div className="hero-detail" key={label}>
-            <span>{label}</span>
-            <strong>{value}</strong>
-          </div>
-        ))}
-
-        <div className="hero-thumbs">
-          {PRODUCTS.map((item, i) => (
-            <button
-              key={item.img}
-              type="button"
-              className={`thumb ${i === active ? "is-active" : ""}`}
-              onClick={() => goTo(i)}
-              aria-label={`Show ${item.name}`}
-              aria-pressed={i === active}
-            >
-              <img src={item.img} alt="" />
-            </button>
-          ))}
         </div>
       </div>
     </section>
