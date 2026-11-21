@@ -440,3 +440,40 @@
     animation: none;
   }
 }
+
+/* ---------- mobile / tablet (below 900px): images on top, text underneath ---------- */
+@media (max-width: 899px) {
+  .hero {
+    --stage-h: 360px; /* height of the image area on mobile */
+  }
+
+  .hero-top {
+    gap: 2.25rem;
+    padding-top: 1.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  /* the image block jumps above the text */
+  .hero-stage-wrap {
+    order: -1;
+  }
+  .orbit-stage {
+    flex: none;
+    height: var(--stage-h);
+    min-height: 0;
+  }
+
+  /* big word sits at the bottom of the image area, under the products */
+  .hero-ghost {
+    inset: auto 0 auto 0;
+    top: calc(1.5rem + var(--stage-h) - 4.8rem);
+    height: 4.8rem;
+    place-items: end center;
+  }
+
+  /* dots sit right under the images */
+  .hero-rail {
+    bottom: auto;
+    top: calc(1.5rem + var(--stage-h) + 0.25rem);
+  }
+}

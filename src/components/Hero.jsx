@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { useNavigate } from "react-router";
 import "../css/Hero.css";
 
@@ -95,7 +101,9 @@ export default function Hero() {
     (delta) => {
       stepRef.current += delta;
       setActive(mod(stepRef.current, COUNT));
-      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const reduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
       if (reduced) {
         angleRef.current = stepRef.current * STEP_DEG;
         paint();
@@ -103,7 +111,7 @@ export default function Hero() {
         rafRef.current = requestAnimationFrame(animate);
       }
     },
-    [animate, paint]
+    [animate, paint],
   );
 
   /* hero height = screen height - whatever sits above it (your navbar) */
@@ -213,7 +221,11 @@ export default function Hero() {
   }, [p.bg, p.ink]);
 
   return (
-    <section className="hero" ref={heroRef} style={{ "--bg": p.bg, "--ink": p.ink }}>
+    <section
+      className="hero"
+      ref={heroRef}
+      style={{ "--bg": p.bg, "--ink": p.ink }}
+    >
       {/* giant word behind the products */}
       <div className="hero-ghost" aria-hidden="true">
         {PRODUCTS.map((item, i) => (
@@ -270,15 +282,32 @@ export default function Hero() {
           </p>
 
           <div className="hero-btns">
-            <button type="button" className="btn-solid" onClick={() => navigate("/products")}>
+            <button
+              type="button"
+              className="btn-solid"
+              onClick={() => navigate("/products")}
+            >
               Explore collection
               <span className="btn-arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
               </span>
             </button>
-            <button type="button" className="btn-line" onClick={() => navigate("/about")}>
+            <button
+              type="button"
+              className="btn-line"
+              onClick={() => navigate("/about")}
+            >
               Our story
             </button>
           </div>
@@ -308,8 +337,14 @@ export default function Hero() {
                 aria-label={item.name}
                 tabIndex={-1}
               >
-                <span className="orbit-shadow" style={{ animationDelay: `${i * -1.3}s` }} />
-                <span className="orbit-bob" style={{ animationDelay: `${i * -1.3}s` }}>
+                <span
+                  className="orbit-shadow"
+                  style={{ animationDelay: `${i * -1.3}s` }}
+                />
+                <span
+                  className="orbit-bob"
+                  style={{ animationDelay: `${i * -1.3}s` }}
+                >
                   <span className="orbit-tilt">
                     <img src={item.img} alt={item.name} draggable="false" />
                   </span>
