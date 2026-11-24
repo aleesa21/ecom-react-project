@@ -18,56 +18,105 @@
 
 /* section 2 css */
 
-.section2{
-    background: #FDF8EC;
-    font-family:'Outfit', sans-serif;
-}
-.sec-2-num{
-    color: #b8860b;
-    font-size:32px;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-}
-.sec-2-text{
-     color:#8c847a;
-     font-family:'Outfit', sans-serif;
-     letter-spacing: 0.06rem;
-     text-transform: uppercase;
-     font-size: 14px;
-}
-.section2-top{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap:25px;
-    padding: 0.5rem;
-}
 
-.rotating{
-    color:#5a5248;
-    font-weight: 600;
-     border-top: 1px solid #e2ddd5;
-  border-bottom: 1px solid #e2ddd5;
-  background: #f0ede6;
-  padding: 0.75rem 0;
+
+
+
+
+
+
+
+/* page colour + side spacing match the header and hero (1rem, then 2rem) */
+
+/* ----------  marquee band ---------- */
+.band {
+  background: #1a1510;
+  color: #f7f5f0;
+}
+.rotating {
   display: flex;
   overflow: hidden;
-  /* overflow-x:auto; */
+  padding: clamp(1.1rem, 2.6vw, 2rem) 0;
 }
-.group{
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    flex-shrink:0;
-    width: max-content;
-    animation: rotate 12s infinite linear;
-    margin-right: 3rem;
+.group {
+  --gap: clamp(2rem, 5vw, 4.5rem);
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  margin-right: var(--gap);
+  flex-shrink: 0;
+  width: max-content;
+  /* moves exactly its own width + gap, so the loop never jumps */
+  animation: marquee 40s linear infinite;
 }
-@keyframes rotate {
-    from {translate: 0;}
-    to {translate: -50%;}
+.rotating:hover .group {
+  animation-play-state: paused;
 }
-   
+@keyframes marquee {
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+.item {
+  --fs: clamp(2.2rem, 6.5vw, 5rem); /* size of the words */
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: var(--fs);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+/* every second word: serif italic, like the hero headline */
+.item:nth-child(even) {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: calc(var(--fs) * 1.15);
+  letter-spacing: 0;
+  text-transform: none;
+}
+/* dots cycle through the four hero colours */
+.dot {
+  flex-shrink: 0;
+  width: 0.34em;
+  height: 0.34em;
+  border-radius: 50%;
+  background: #c9cfd4;
+}
+.item:nth-child(4n + 1) .dot {
+  background: #c8d6bb;
+}
+.item:nth-child(4n + 2) .dot {
+  background: #eebd9f;
+}
+.item:nth-child(4n + 3) .dot {
+  background: #b9cee4;
+}
+.item:nth-child(4n) .dot {
+  background: #c9cfd4;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* section-3 css */
 .section-3{
     background: #f7f5f0;

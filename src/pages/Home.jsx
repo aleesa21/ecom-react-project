@@ -1,14 +1,12 @@
 import { useContext } from "react";
 import "../css/Home.css";
 import { ProductContext } from "../context/ProductContext";
-import { useNavigate } from "react-router";
 import { CartContext } from "../context/CartContext";
 import { useState } from "react";
 import Hero from "../components/Hero";
 export default function Home() {
   const { product } = useContext(ProductContext);
   const [filter, setFilter] = useState("all");
-  let navigate = useNavigate();
   const { cart, addToCart } = useContext(CartContext);
   const categories = ["All",...new Set(product.map((prod) => prod.category))];
 
@@ -21,50 +19,28 @@ export default function Home() {
   function checkincart(prod) {
     return cart.find((cartitem) => cartitem.id === prod.id);
   }
+
+  const marquee=["Clothing", "Jewelery", "Women's clothing", "Men's clothing", "Electronics"]
   return (
     <>
       <main>
      <Hero />
-        <section>
-          <div className="padding hr-home">
-            <hr></hr>
-          </div>
-
-          <div className="section2">
-            <div className="section2-top padding">
-              <div>
-                <div className="sec-2-num">20K+</div>
-                <div className="sec-2-text">Products</div>
-              </div>
-              <div>
-                <div className="sec-2-num">150K</div>
-                <div className="sec-2-text">Customers</div>
-              </div>
-              <div>
-                <div className="sec-2-num">4.9★</div>
-                <div className="sec-2-text">Avg Rating</div>
-              </div>
-            </div>
-            <div className="section2-down">
-              <div className="rotating">
-                <div className="group">
-                  <div>• CLOTHING</div>
-                  <div>• JEWELERY</div>
-                  <div>• ELECTRONICS</div>
-                  <div>• WOMEN'S CLOTHING</div>
-                  <div>• MEN'S CLOTHING</div>
-                </div>
-                <div className="group">
-                  <div>• CLOTHING</div>
-                  <div>• JEWELERY</div>
-                  <div>• ELECTRONICS</div>
-                  <div>• WOMEN'S CLOTHING</div>
-                  <div>• MEN'S CLOTHING</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+     <section className="band">
+       <div className="rotating" aria-label="Shop by category">
+         {[0, 1].map((g) => (
+           <div className="group" key={g} aria-hidden={g > 0}>
+             {marquee.map((c) => (
+               <div className="item" key={c}>
+                 <i className="dot" />
+                 {c}
+               </div>
+             ))}
+           </div>
+         ))}
+       </div>
+     </section>
+        
+        
         <section>
           <div className="section-3 padding">
             <div className="golden sec3-top-text">Curated For You</div>
