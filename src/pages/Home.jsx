@@ -4,6 +4,7 @@ import { ProductContext } from "../context/ProductContext";
 import { CartContext } from "../context/CartContext";
 import { useState } from "react";
 import Hero from "../components/Hero";
+import FeaturedProducts from "../components/FeaturedProducts";
 export default function Home() {
   const { product } = useContext(ProductContext);
   const [filter, setFilter] = useState("all");
@@ -41,67 +42,14 @@ export default function Home() {
      </section>
         
         
-        <section>
-          <div className="section-3 padding">
-            <div className="golden sec3-top-text">Curated For You</div>
-            <div className="featured-text">
-              Featured <span>Products</span>
-            </div>
-            <div className="select-list">
-             
-              {categories.map((cat) => {
-                return (
-                  <button key={cat}
-                    className={`filter-list ${filter.toLowerCase()===cat.toLowerCase()?"filter-active":""}`}
-                    onClick={() => {
-                      setFilter(cat);
-                    }}
-                  >
-                    {cat}
-                  </button>
-                );
-              })}
-            </div>
-            <div className="poducts-container">
-              {filtered.slice(0, 8).map((item) => {
-                return (
-                  <div className="product" key={item.id}>
-                    <div className="product-top">
-                      <div>
-                        <img
-                          className="prod-img-home"
-                          src={item.image}
-                          alt={item.title}
-                        ></img>
-                      </div>
-                    </div>
-                    <div className="product-bottom">
-                      <div className="prod-category">{item.category}</div>
-                      <div className="prod-title">{item.title}</div>
-                      <div className="prod-rating">
-                        {item.rating.rate}({item.rating.count})
-                      </div>
-                      <div className="prod-price-plus">
-                        <div className="prod-price">${item.price}</div>
-                        <button
-                          style={{
-                            background: checkincart(item) ? "green" : "#b8860b",
-                          }}
-                          onClick={() => {
-                            addToCart(item);
-                          }}
-                          className="prod-plusbtn"
-                        >
-                          {checkincart(item) ? "✓" : "+"}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+     <FeaturedProducts
+       categories={categories}
+       filter={filter}
+       setFilter={setFilter}
+       items={filtered}
+       addToCart={addToCart}
+       checkincart={checkincart}
+     />
       </main>
     </>
   );
